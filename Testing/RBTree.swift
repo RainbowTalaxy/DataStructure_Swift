@@ -253,36 +253,35 @@ class RBTree<T: Comparable> {
     
     //  MARK: Removal
     func remove(withKey key: T) {
-        var target = Node(withKey: key)
-        if let node = find(withKey: key) {
-            target = node
+        if var target = find(withKey: key) {
+            var nodeForRoot: Node? = target
+            if !target.isLeaf, let successor = target.successor {
+                target.key = successor.key
+                target = successor
+            }
+            if target.isLeaf {
+                nodeForRoot = target.parent
+                if target.color == .BLACK {
+                    target.removeRepair()
+                }
+            } else {
+                let child = target.left ?? target.right
+                target.key = child!.key
+                if target.color == .BLACK && child?.color == Color.BLACK {
+                    target.removeRepair()
+                }
+                target = child!
+            }
+            if target.isLeftChild {
+                target.parent?.left = nil
+            } else if target.isRightChild {
+                target.parent?.right = nil
+            }
+            target.parent = nil
+            updateRoot(withNode: nodeForRoot)
         } else {
             return
         }
-        if !target.isLeaf, let successor = target.successor {
-            target.key = successor.key
-            target = successor
-        }
-        var nodeForRoot: Node? = target
-        if target.isLeaf {
-            nodeForRoot = target.parent
-            if target.color == .BLACK {
-                target.removeRepair()
-            }
-        } else {
-            let child = target.left ?? target.right
-            target.key = child!.key
-            if target.color == .BLACK && child?.color == Color.BLACK {
-                target.removeRepair()
-            }
-            target = child!
-        }
-        if target.isLeftChild {
-            target.parent?.left = nil
-        } else if target.isRightChild {
-            target.parent?.right = nil
-        }
-        updateRoot(withNode: nodeForRoot)
     }
     
     //  MARK: Print Level Counts

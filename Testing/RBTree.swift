@@ -269,17 +269,18 @@ class RBTree<T: Comparable> {
             if target.color == .BLACK {
                 target.removeRepair()
             }
-            if target.isLeftChild {
-                target.parent?.left = nil
-            } else if target.isRightChild {
-                target.parent?.right = nil
-            }
         } else {
             let child = target.left ?? target.right
             target.key = child!.key
             if target.color == .BLACK && child?.color == Color.BLACK {
                 target.removeRepair()
             }
+            target = child!
+        }
+        if target.isLeftChild {
+            target.parent?.left = nil
+        } else if target.isRightChild {
+            target.parent?.right = nil
         }
         updateRoot(withNode: nodeForRoot)
     }

@@ -66,6 +66,19 @@ class RBTree<T: Comparable> {
                 return nil
             }
         }
+        var successor: Node? {
+            if var current = right {
+                while true {
+                    if let child = current.left {
+                        current = child
+                    } else {
+                        return current
+                    }
+                }
+            } else {
+                return nil
+            }
+        }
         
         //  MARK: Rotation
         func rotateLeft() {
@@ -246,44 +259,27 @@ class RBTree<T: Comparable> {
         } else {
             return
         }
-        if !target.isLeaf {
-            if var current = target.right {
-                while true {
-                    if let child = current.left {
-                        current = child
-                    } else {
-                        break
-                    }
-                }
-                target.key = current.key
-                target = current
-            }
+        if !target.isLeaf, let successor = target.successor {
+            target.key = successor.key
+            target = successor
         }
-        var child, nodeForRoot: Node?
+        var nodeForRoot: Node? = target
         if target.isLeaf {
-            child = target
-            nodeForRoot = child?.parent
-        } else {
-            child = target.left ?? target.right
+            nodeForRoot = target.parent
+            if target.color == .BLACK {
+                target.removeRepair()
+            }
             if target.isLeftChild {
-                target.parent?.left = child
+                target.parent?.left = nil
             } else if target.isRightChild {
-                target.parent?.right = child
+                target.parent?.right = nil
             }
-            child?.parent = target.parent
-            nodeForRoot = child
-        }
-        if target.color == .BLACK {
-            if child?.color == Color.RED {
-                child?.color = .BLACK
-            } else {
-                child?.removeRepair()
+        } else {
+            let child = target.left ?? target.right
+            target.key = child!.key
+            if target.color == .BLACK && child?.color == Color.BLACK {
+                target.removeRepair()
             }
-        }
-        if target.isLeftChild {
-            target.parent?.left = nil
-        } else if target.isRightChild {
-            target.parent?.right = nil
         }
         updateRoot(withNode: nodeForRoot)
     }

@@ -219,6 +219,14 @@ class RBTree<T: Comparable> {
         return nil
     }
     
+    func contain(withKey key: T) -> Bool {
+        if let _ = find(withKey: key) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     //  MARK: Insertion
     func insert(withKey key: T) {
         let newNode = Node(withKey: key)

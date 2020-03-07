@@ -41,6 +41,7 @@
 		7E717C88240615C200A3432D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		7EACDF90241122D700E2F197 /* PrintTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintTree.swift; sourceTree = "<group>"; };
 		7EC888E024101DD700701BBE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7ECE2AEB2414090500997291 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7EE973B6240EC15700DAF80F /* Knapsack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knapsack.swift; sourceTree = "<group>"; };
 		7EEA84BD240C2D9D00A032FC /* Testing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Testing; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EEA84BF240C2D9D00A032FC /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		7E717C7C240615C200A3432D = {
 			isa = PBXGroup;
 			children = (
+				7ECE2AEB2414090500997291 /* README.md */,
 				7E717C87240615C200A3432D /* DataStructure */,
 				7EEA84BE240C2D9D00A032FC /* Testing */,
 				7E717C86240615C200A3432D /* Products */,

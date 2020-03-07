@@ -65,11 +65,11 @@ class PrintTree {
     
     private func fresh() {
         level = tree.height
-        if level <= 1 {
-            level = 2
-        }
         datas.removeAll()
         branch.removeAll()
+        if level <= 1 {
+            return
+        }
         for i in 1..<level {
             var s = ""
             for _ in 0..<pow2(i - 1) {

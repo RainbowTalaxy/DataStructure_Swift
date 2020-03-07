@@ -7,6 +7,7 @@ An RBTree has such methods:
 * insert(withKey:)
 * remove(withKey:)
 * contain(withKey:)
+* tree.levelPrint()
 
 A PrintTree can print an RBTree by such code:
 ```swift
